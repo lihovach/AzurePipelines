@@ -3,27 +3,19 @@ import json
 import time
 import logging
 import os
-import sys
+import sys 
 
-# Configure logging to output to the pipeline logs
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
+# Configure logging
+logging.basicConfig(filename='/home/hana/project_creation.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
-# Retrieve API key, project file path, and group IDs from environment variables
-API_KEY = os.getenv('BRIGHTSEC_API_KEY')
+# Fixed file path for the project file
 PROJECT_FILE = os.getenv('PROJECT_FILE')
-GROUP_IDS = os.getenv('GROUP_IDS', '').split(',')  # Split comma-separated group IDs into a list
+API_KEY = os.getenv('BRIGHTSEC_API_KEY') 
+GROUP_IDS = os.getenv('GROUP_IDS', '').split(',')
 API_URL = "https://app.brightsec.com/project"
 
 if not API_KEY:
-    logging.error("API key not found. Please set the BRIGHTSEC_API_KEY environment variable.")
-    sys.exit(1)
-
-if not PROJECT_FILE:
-    logging.error("Project file not found. Please set the PROJECT_FILE environment variable.")
-    sys.exit(1)
-
-if not GROUP_IDS or GROUP_IDS == ['']:
-    logging.error("Group IDs not found. Please set the GROUP_IDS environment variable.")
+    print("API key not found. Please set the BRIGHTSEC_API_KEY environment variable.")
     sys.exit(1)
 
 def create_project(project_name):
@@ -37,27 +29,26 @@ def create_project(project_name):
         "Content-Type": "application/json"
     }
 
-    logging.info(f"Creating project: {project_name}")
+    print("Creating project with payload:")
+    print(json.dumps(payload, indent=2))
+
     response = requests.post(API_URL, headers=headers, json=payload)
     http_code = response.status_code
     response_body = response.text
 
-    if http_code == 201:
+    if http_code == 201:  # Ensure 201 status for success
         logging.info(f"Project '{project_name}' created successfully.")
     else:
         logging.error(f"Failed to create project '{project_name}'. HTTP code: {http_code}. Response: {response_body}")
 
 def main():
-    try:
-        with open(PROJECT_FILE, 'r') as file:
-            for line in file:
-                project_name = line.strip()
-                create_project(project_name)
-                time.sleep(7)  # Delay to avoid overwhelming the API
-        logging.info("All projects have been created.")
-    except Exception as e:
-        logging.error(f"Error occurred: {e}")
-        sys.exit(1)
+    with open(PROJECT_FILE, 'r') as file:
+        for line in file:
+            project_name = line.strip()
+            create_project(project_name)
+            time.sleep(7)
+
+    print("All projects have been created.")
 
 if __name__ == "__main__":
     main()
