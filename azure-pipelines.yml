@@ -26,11 +26,11 @@ stages:
       displayName: 'Install dependencies'
 
     - script: |
-        python your_python_script.py
+        python create_project.py
       displayName: 'Run Python Script'
 
       env:
-        BRIGHTSEC_API_KEY: $(BRIGHTSEC_API_KEY)  # Azure Pipeline variable for API key
-        PROJECT_FILE: $(Pipeline.Workspace)/your_repo_path/project.txt  # Path to the project file
-        GROUP_IDS: $(GROUP_IDS)  # Azure Pipeline variable for Group IDs, e.g., "group1,group2,group3"
+        BRIGHTSEC_API_KEY: $(BRIGHTSEC_API_KEY)  
+        PROJECT_FILE: $(Pipeline.Workspace)/your_repo_path/project.txt  
+        GROUP_IDS: $(GROUP_IDS)  
 
