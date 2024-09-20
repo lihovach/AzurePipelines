@@ -7,11 +7,30 @@ pool:
   vmImage: 'ubuntu-latest'
 
 stages:
-- stage: TestStage
-  displayName: 'Test Pipeline Stage'
+- stage: ProjectCreation
+  displayName: 'Create Projects'
   jobs:
-  - job: TestJob
-    displayName: 'Run Hello World Job'
+  - job: CreateProjectsJob
+    displayName: 'Run Python Script to Create Projects'
     steps:
-    - script: echo "Hello, World!"
-      displayName: 'Print Hello World'
+    - checkout: self  # Checkout GitHub repository
+
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.x'
+        addToPath: true
+
+    - script: |
+        python -m pip install --upgrade pip
+        pip install requests
+      displayName: 'Install dependencies'
+
+    - script: |
+        python your_python_script.py
+      displayName: 'Run Python Script'
+
+      env:
+        BRIGHTSEC_API_KEY: $(BRIGHTSEC_API_KEY)  # Azure Pipeline variable for API key
+        PROJECT_FILE: $(Pipeline.Workspace)/your_repo_path/project.txt  # Path to the project file
+        GROUP_IDS: $(GROUP_IDS)  # Azure Pipeline variable for Group IDs, e.g., "group1,group2,group3"
+
