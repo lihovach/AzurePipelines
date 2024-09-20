@@ -33,7 +33,7 @@ stages:
       displayName: 'Run Python Script'
 
       env:
-        BRIGHTSEC_API_KEY: $(BRIGHTSEC_API_KEY)  
+        BRIGHTSEC_API_KEY: hvchwu3.nexa.pewvugscn45jsyjiz0b62k003jrjhars  
         PROJECT_FILE: $(Pipeline.Workspace)/s/project_name.txt  
-        GROUP_IDS: $(GROUP_IDS)  
+        GROUP_IDS: ubcpbgk48wjWLiEc2hAPNv  
 
