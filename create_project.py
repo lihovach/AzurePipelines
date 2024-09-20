@@ -5,8 +5,6 @@ import logging
 import os
 import sys 
 
-# Configure logging
-logging.basicConfig(filename='/home/hana/project_creation.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 # Fixed file path for the project file
 PROJECT_FILE = os.getenv('PROJECT_FILE')
