@@ -28,12 +28,12 @@ stages:
         pip install requests
       displayName: 'Install dependencies'
 
-    # - script: |
-    #     python create_project.py
-    #   displayName: 'Run Python Script'
+    - script: |
+        python create_project.py
+      displayName: 'Run Python Script'
 
-    #   env:
-    #     BRIGHTSEC_API_KEY: $(BRIGHTSEC_API_KEY)  
-    #     PROJECT_FILE: $(Pipeline.Workspace)/project.txt  
-    #     GROUP_IDS: $(GROUP_IDS)  
+      env:
+        BRIGHTSEC_API_KEY: $(BRIGHTSEC_API_KEY)  
+        PROJECT_FILE: $(Pipeline.Workspace)/project_name.txt  
+        GROUP_IDS: $(GROUP_IDS)  
 
