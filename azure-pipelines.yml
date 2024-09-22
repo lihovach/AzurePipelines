@@ -12,6 +12,8 @@ parameters:
 stages:
   - stage: Stage1
     displayName: "Run Python Script 1"
+    variables:
+    - group: VG1
     jobs:
       - job: RunPythonScript
         steps:
