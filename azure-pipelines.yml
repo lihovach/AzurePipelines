@@ -1,15 +1,7 @@
-trigger:
-  branches:
-    include:
-      - main
-
 pool:
   vmImage: 'ubuntu-latest'
 
 parameters:
-  - name: runStage1
-    type: boolean
-    default: false
   - name: runStage2
     type: boolean
     default: false
@@ -20,7 +12,6 @@ parameters:
 stages:
   - stage: Stage1
     displayName: "Run Python Script 1"
-    condition: eq(variables['runStage1'], 'true')  
     jobs:
       - job: RunPythonScript
         steps:
