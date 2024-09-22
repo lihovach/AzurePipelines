@@ -19,8 +19,12 @@ stages:
             inputs:
               versionSpec: '3.x'
           - script: |
-              python3 create_project1.py --apiKey $(BRIGHTSEC_API_KEY) --groupIds $(GROUP_IDS) --projectFile $(PROJECT_NAME_FILE)
+              python3 create_project.py --apiKey $(BRIGHTSEC_API_KEY) --groupIds $(GROUP_IDS) --projectFile $(PROJECT_NAME_FILE)
             displayName: "Run Python Project Creation Script"
+            env:
+              BRIGHTSEC_API_KEY: $(BRIGHTSEC_API_KEY)
+              GROUP_IDS: $(GROUP_IDS)
+              PROJECT_NAME_FILE: $(PROJECT_NAME_FILE)
   
   - stage: Stage2
     displayName: "Run Python Script 2"
