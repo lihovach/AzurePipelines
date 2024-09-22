@@ -3,50 +3,55 @@ import json
 import time
 import logging
 import os
-import sys 
+import sys
+import argparse
 
+# Configure logging
+logging.basicConfig(filename='project_creation.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
-# Fixed file path for the project file
-PROJECT_FILE = os.getenv('PROJECT_FILE')
-API_KEY = os.getenv('BRIGHTSEC_API_KEY') 
-GROUP_IDS = os.getenv('GROUP_IDS', '').split(',')
-API_URL = "https://app.brightsec.com/project"
-
-if not API_KEY:
-    print("API key not found. Please set the BRIGHTSEC_API_KEY environment variable.")
-    sys.exit(1)
-
-def create_project(project_name):
+def create_project(api_key, group_ids, project_name):
     payload = {
         "name": project_name,
-        "groupIds": GROUP_IDS
+        "groupIds": group_ids.split(',')  # Expecting a comma-separated string
     }
 
     headers = {
-        "Authorization": f"api-key {API_KEY}",
+        "Authorization": f"Api-Key {api_key}",
         "Content-Type": "application/json"
     }
 
     print("Creating project with payload:")
     print(json.dumps(payload, indent=2))
 
-    response = requests.post(API_URL, headers=headers, json=payload)
+    response = requests.post("https://app.brightsec.com/api/v1/projects", headers=headers, json=payload)
     http_code = response.status_code
     response_body = response.text
 
-    if http_code == 201:  # Ensure 201 status for success
+    if http_code == 204:  # Success
         logging.info(f"Project '{project_name}' created successfully.")
     else:
         logging.error(f"Failed to create project '{project_name}'. HTTP code: {http_code}. Response: {response_body}")
+        print(f"Failed to create project '{project_name}' due to an error: {http_code}")
 
 def main():
-    with open(PROJECT_FILE, 'r') as file:
-        for line in file:
-            project_name = line.strip()
-            create_project(project_name)
-            time.sleep(7)
+    parser = argparse.ArgumentParser(description='Create projects in BrightSec.')
+    parser.add_argument('--apiKey', required=True, help='API Key for authentication')
+    parser.add_argument('--groupIds', required=True, help='Comma-separated group IDs')
+    parser.add_argument('--projectFile', required=True, help='Path to the project name file')
+    
+    args = parser.parse_args()
 
-    print("All projects have been created.")
+    try:
+        with open(args.projectFile, 'r') as file:
+            for line in file:
+                project_name = line.strip()
+                create_project(args.apiKey, args.groupIds, project_name)
+                time.sleep(7)  # Sleep to prevent rate limiting
+
+        print("All projects have been created.")
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     main()
