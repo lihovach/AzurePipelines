@@ -1,0 +1,3 @@
+2024-09-22 08:41:38,873 - Error occurred while creating project 'TestProject1': 401 Client Error: Unauthorized for url: https://app.brightsec.com/api/v1/projects
+2024-09-22 08:47:30,606 - Error occurred while creating project 'TestProject1': 409 Client Error: Conflict for url: https://app.brightsec.com/api/v1/projects
+2024-09-22 08:48:07,007 - Project 'TestA' created successfully.

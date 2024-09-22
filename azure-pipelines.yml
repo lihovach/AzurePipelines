@@ -7,33 +7,41 @@ pool:
   vmImage: 'ubuntu-latest'
 
 stages:
-- stage: ProjectCreation
-  displayName: 'Create Projects'
-  jobs:
-  - job: CreateProjectsJob
-    displayName: 'Run Python Script to Create Projects'
-    steps:
-    - checkout: self  # Checkout GitHub repository
-    - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: 'pwd'
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '3.x'
-        addToPath: true
+  - stage: Stage1
+    displayName: "Run Python Script 1"
+    condition: eq(variables['runStage1'], 'true')  
+    jobs:
+      - job: RunPythonScript
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.x'
+          - script: |
+              python3 create_project1.py --apiKey $(BRIGHTSEC_API_KEY) --groupIds $(GROUP_IDS) --projectFile $(PROJECT_NAME_FILE)
+            displayName: "Run Python Project Creation Script"
+  
+  - stage: Stage2
+    displayName: "Run Python Script 2"
+    condition: eq(variables['runStage2'], 'true')  
+    jobs:
+      - job: RunSecondPythonScript
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.x'
+          - script: |
+              python3 script2.py
+            displayName: "Run Second Python Script"
 
-    - script: |
-        python -m pip install --upgrade pip
-        pip install requests
-      displayName: 'Install dependencies'
-
-    - script: |
-        python create_project.py
-      displayName: 'Run Python Script'
-
-      env:
-        BRIGHTSEC_API_KEY: 'hvchwu3.nexa.pewvugscn45jsyjiz0b62k003jrjhars1'  
-        PROJECT_FILE: $(Pipeline.Workspace)/s/project_name.txt  
-        GROUP_IDS: 'ubcpbgk48wjWLiEc2hAPNv'  
-
+  - stage: Stage3
+    displayName: "Run Python Script 3"
+    condition: eq(variables['runStage3'], 'true')  # Conditional for stage 3
+    jobs:
+      - job: RunThirdPythonScript
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.x'
+          - script: |
+              python3 script3.py
+            displayName: "Run Third Python Script"
