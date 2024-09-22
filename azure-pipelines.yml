@@ -6,6 +6,17 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+parameters:
+  - name: runStage1
+    type: boolean
+    default: false
+  - name: runStage2
+    type: boolean
+    default: false
+  - name: runStage3
+    type: boolean
+    default: false
+
 stages:
   - stage: Stage1
     displayName: "Run Python Script 1"
