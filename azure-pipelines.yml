@@ -21,6 +21,10 @@ stages:
             inputs:
               versionSpec: '3.x'
           - script: |
+              python3 -m pip install -r requirements.txt
+            displayName: "Install Requests Library"
+
+          - script: |
               python3 create_project.py --apiKey $(BRIGHTSEC_API_KEY) --groupIds $(GROUP_IDS) --projectFile $(PROJECT_NAME_FILE)
             displayName: "Run Python Project Creation Script"
             env:
