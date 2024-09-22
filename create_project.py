@@ -29,7 +29,7 @@ def create_project(api_key, group_ids, project_name):
 
     if http_code == 204:  # Success
         logging.info(f"Project '{project_name}' created successfully.")
-    else
+    else:
         logging.error(f"Failed to create project '{project_name}'. HTTP code: {http_code}. Response: {response_body}")
         print(f"Error details: {response_body}")
 
