@@ -1,15 +1,19 @@
-trigger:
-  branches:
-    include:
-      - main
-
 pool:
   vmImage: 'ubuntu-latest'
+
+parameters:
+  - name: runStage2
+    type: boolean
+    default: false
+  - name: runStage3
+    type: boolean
+    default: false
 
 stages:
   - stage: Stage1
     displayName: "Run Python Script 1"
-    condition: eq(variables['runStage1'], 'true')  
+    variables:
+    - group: VG1
     jobs:
       - job: RunPythonScript
         steps:
@@ -17,8 +21,13 @@ stages:
             inputs:
               versionSpec: '3.x'
           - script: |
-              python3 create_project1.py --apiKey $(BRIGHTSEC_API_KEY) --groupIds $(GROUP_IDS) --projectFile $(PROJECT_NAME_FILE)
+              python3 -m pip install -r requirements.txt #Install Requests Library
+              python3 create_project.py --apiKey $(BRIGHTSEC_API_KEY) --groupIds $(GROUP_IDS) --projectFile $(PROJECT_NAME_FILE)
             displayName: "Run Python Project Creation Script"
+            env:
+              BRIGHTSEC_API_KEY: $(BRIGHTSEC_API_KEY)
+              GROUP_IDS: $(GROUP_IDS)
+              PROJECT_NAME_FILE: $(PROJECT_NAME_FILE)
   
   - stage: Stage2
     displayName: "Run Python Script 2"
