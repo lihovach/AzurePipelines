@@ -13,7 +13,9 @@ variables:
 - name: TARGET_URL
   value: https://brokencrystals.com/
 - name: NAME_DISCOVERY
-  value: Discovery123
+  value: Discovery123632
+- name: NAME_SCAN
+  value: Scan12392039
 
 stages:
 - stage: CreateProject
@@ -40,3 +42,15 @@ stages:
             pip install requests
             python3 create_discovery.py --apiKey $(BRIGHTSEC_API_KEY) --projectId $(PROJECT_ID) --targetUrl $(TARGET_URL) --nameDiscovery $(NAME_DISCOVERY)
           displayName: "Create Discovery"
+- stage: RunScan
+  displayName: 'Run Scan'
+  jobs:
+    - job: RunScriptRunScan
+      steps:
+        - task: UsePythonVersion@0
+          inputs:
+            versionSpec: '3.x'
+        - script: |
+            pip install requests
+            python3 run_scan.py --apiKey $(BRIGHTSEC_API_KEY) --projectId $(PROJECT_ID) --targetUrl $(TARGET_URL) --nameScan $(NAME_SCAN)
+          displayName: "Run Scan"
