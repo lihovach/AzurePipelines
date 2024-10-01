@@ -1,13 +1,7 @@
 import requests
 import json
 import time
-import logging
-import os
-import sys
 import argparse
-
-# Configure logging
-logging.basicConfig(filename='project_creation.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 def create_project(api_key, group_ids, project_name):
     payload = {
@@ -28,9 +22,10 @@ def create_project(api_key, group_ids, project_name):
     response_body = response.text
 
     if http_code == 204:  # Success
-        logging.info(f"Project '{project_name}' created successfully.")
+        print(f"Project '{project_name}' created successfully.")
     else:
         print(f"Failed to create project '{project_name}' due to an error: {http_code}")
+
 def main():
     parser = argparse.ArgumentParser(description='Create projects in BrightSec.')
     parser.add_argument('--apiKey', required=True, help='API Key for authentication')
@@ -45,10 +40,7 @@ def main():
                 project_name = line.strip()
                 create_project(args.apiKey, args.groupIds, project_name)
                 time.sleep(7)  # Sleep to prevent rate limiting
-
-        print("All projects have been created.")
     except Exception as e:
-        logging.error(f"An error occurred: {e}")
         print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
