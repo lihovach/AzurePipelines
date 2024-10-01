@@ -36,6 +36,7 @@ stages:
           inputs:
             versionSpec: '3.x'
         - script: |
+            pip install requests
             python3 create_project.py --apiKey $(BRIGHTSEC_API_KEY) --groupIds $(GROUP_IDS) --projectFile $(PROJECT_NAME_FILE)
           displayName: "Create Project"
 
