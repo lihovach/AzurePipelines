@@ -3,7 +3,7 @@ pool:
 
 variables:
 - name: BRIGHTSEC_API_KEY
-  value: 0spnuda.nexa.c1goqd3vxnqxzangckjvwsjnyrizhglj
+  value: $(BRIGHTSEC_API_KEY)
 - name: GROUP_IDS
   value: auTxkMgnzoeRW9MRdCF5ZQ
 - name: PROJECT_NAME_FILE
