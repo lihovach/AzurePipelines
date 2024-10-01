@@ -1,21 +1,19 @@
 pool:
   vmImage: 'ubuntu-latest'
 
-parameters:
+# parameters:
   # - name: CreateProject
   #   displayName: 'CreateProject'
   #   type: boolean
   #   default: true
-
-  - name: runStage2
-    displayName: 'Run Stage 2'
-    type: boolean
-    default: true
-
-  - name: runStage3
-    displayName: 'Run Stage 3'
-    type: boolean
-    default: true
+  # - name: runStage2
+  #   displayName: 'Run Stage 2'
+  #   type: boolean
+  #   default: true
+  # - name: runStage3
+  #   displayName: 'Run Stage 3'
+  #   type: boolean
+  #   default: true
 
 variables:
 - name: BRIGHTSEC_API_KEY
@@ -24,6 +22,12 @@ variables:
   value: auTxkMgnzoeRW9MRdCF5ZQ
 - name: PROJECT_NAME_FILE
   value: project_name.txt
+- name: PROJECT_ID
+  value: tg3G88rPJS3ckSSYPmgHCv
+- name: TARGET_URL
+  value: https://brokencrystals.com/
+- name: NAME_DISCOVERY
+  value: Discovery123
 
 stages:
 - stage: CreateProject
@@ -39,19 +43,16 @@ stages:
             pip install requests
             python3 create_project.py --apiKey $(BRIGHTSEC_API_KEY) --groupIds $(GROUP_IDS) --projectFile $(PROJECT_NAME_FILE)
           displayName: "Create Project"
-
-- stage: Stage2
-  displayName: 'Stage 2'
-  condition: and(succeeded(), eq(variables['runStage2'], 'true'))
+- stage: CreateDiscovery
+  displayName: 'Create Discovery'
+  # condition: and(succeeded(), eq(variables['CreateDiscovery'], 'true'))
   jobs:
-  - job: Job2
-    steps:
-    - script: echo "Running Stage 2 with variable $(myVariable)"
-
-- stage: Stage3
-  displayName: 'Stage 3'
-  condition: and(succeeded(), eq(variables['runStage3'], 'true'))
-  jobs:
-  - job: Job3
-    steps:
-    - script: echo "Running Stage 3 with variable $(myVariable)"
+    - job: RunScriptCreateDiscovery
+      steps:
+        - task: UsePythonVersion@0
+          inputs:
+            versionSpec: '3.x'
+        - script: |
+            pip install requests
+            python3 create_discovery.py --apiKey $(BRIGHTSEC_API_KEY) --projectId $(PROJECT_ID) --targetUrl $(TARGET_URL) --nameDiscovery $(NAME_DISCOVERY)
+          displayName: "Create Discovery"
