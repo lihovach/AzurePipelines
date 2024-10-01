@@ -2,8 +2,8 @@ pool:
   vmImage: 'ubuntu-latest'
 
 parameters:
-  - name: runStage1
-    displayName: 'Run Stage 1'
+  - name: CreateProject
+    displayName: 'CreateProject'
     type: boolean
     default: true
 
@@ -18,16 +18,24 @@ parameters:
     default: true
 
 variables:
-  myVariable: $(myVariable)
+- name: myReadOnlyVar
+  value: myValue
+  readonly: true
+
 
 stages:
-- stage: Stage1
-  displayName: 'Stage 1'
-  condition: and(succeeded(), eq(variables['runStage1'], 'true'))
+- stage: CreateProject
+  displayName: 'Create Project'
+  condition: and(succeeded(), eq(variables['CreateProject'], 'true'))
   jobs:
-  - job: Job1
-    steps:
-    - script: echo "Running Stage 1 with variable $(myVariable)"
+    - job: RunScriptCreateProject
+      steps:
+        - task: UsePythonVersion@0
+          inputs:
+            versionSpec: '3.x'
+        - script: |
+            python3 create_project.py --apiKey $(BRIGHTSEC_API_KEY) --groupIds $(GROUP_IDS) --projectFile $(PROJECT_NAME_FILE)
+          displayName: "Create Project"
 
 - stage: Stage2
   displayName: 'Stage 2'
