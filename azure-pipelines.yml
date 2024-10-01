@@ -1,11 +1,11 @@
 pool:
   vmImage: 'ubuntu-latest'
 
-# parameters:
-  # - name: CreateProject
-  #   displayName: 'CreateProject'
-  #   type: boolean
-  #   default: true
+parameters:
+  - name: CreateProject
+    displayName: 'CreateProject'
+    type: boolean
+    default: false
   # - name: runStage2
   #   displayName: 'Run Stage 2'
   #   type: boolean
@@ -32,7 +32,7 @@ variables:
 stages:
 - stage: CreateProject
   displayName: 'Create Project'
-  # condition: and(succeeded(), eq(variables['CreateProject'], 'true'))
+  condition: and(succeeded(), eq(variables['CreateProject'], 'true'))
   jobs:
     - job: RunScriptCreateProject
       steps:
