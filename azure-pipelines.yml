@@ -1,20 +1,6 @@
 pool:
   vmImage: 'ubuntu-latest'
 
-parameters:
-  - name: CreateProject
-    displayName: 'CreateProject'
-    type: boolean
-    default: false
-  # - name: runStage2
-  #   displayName: 'Run Stage 2'
-  #   type: boolean
-  #   default: true
-  # - name: runStage3
-  #   displayName: 'Run Stage 3'
-  #   type: boolean
-  #   default: true
-
 variables:
 - name: BRIGHTSEC_API_KEY
   value: 0spnuda.nexa.c1goqd3vxnqxzangckjvwsjnyrizhglj
@@ -32,7 +18,6 @@ variables:
 stages:
 - stage: CreateProject
   displayName: 'Create Project'
-  condition: and(succeeded(), eq(variables['CreateProject'], 'true'))
   jobs:
     - job: RunScriptCreateProject
       steps:
@@ -45,7 +30,6 @@ stages:
           displayName: "Create Project"
 - stage: CreateDiscovery
   displayName: 'Create Discovery'
-  # condition: and(succeeded(), eq(variables['CreateDiscovery'], 'true'))
   jobs:
     - job: RunScriptCreateDiscovery
       steps:
