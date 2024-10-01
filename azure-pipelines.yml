@@ -1,5 +1,6 @@
 pool:
   vmImage: 'ubuntu-latest'
+
 parameters:
   - name: runStage1
     displayName: 'Run Stage 1'
@@ -17,8 +18,7 @@ parameters:
     default: true
 
 variables:
-  type: string
-  default: 'defaultValue'
+  myVariable: $(myVariable)
 
 stages:
 - stage: Stage1
