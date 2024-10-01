@@ -18,10 +18,12 @@ parameters:
     default: true
 
 variables:
-- name: myReadOnlyVar
-  value: myValue
-  readonly: true
-
+- name: BRIGHTSEC_API_KEY
+  value: 0spnuda.nexa.c1goqd3vxnqxzangckjvwsjnyrizhglj
+- name: GROUP_IDS
+  value: auTxkMgnzoeRW9MRdCF5ZQ
+- name: PROJECT_NAME_FILE
+  value: project_name.txt
 
 stages:
 - stage: CreateProject
