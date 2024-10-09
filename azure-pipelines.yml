@@ -3,19 +3,19 @@ pool:
 
 variables:
 - name: BRIGHTSEC_API_KEY
-  value: $(BRIGHTSEC_API_KEY)
+  value: 0spnuda.nexa.c1goqd3vxnqxzangckjvwsjnyrizhglj
 - name: GROUP_IDS
   value: auTxkMgnzoeRW9MRdCF5ZQ
 - name: PROJECT_NAME_FILE
   value: project_name.txt
 - name: PROJECT_ID
-  value: tg3G88rPJS3ckSSYPmgHCv
+  value: 4JtHcWih7ouZy7FBVUySo2
 - name: TARGET_URL
   value: https://brokencrystals.com/
 - name: NAME_DISCOVERY
-  value: Discovery123632
+  value: DiscoveryTest123
 - name: NAME_SCAN
-  value: Scan12392039
+  value: ScanTest123
 
 stages:
 - stage: CreateProject
