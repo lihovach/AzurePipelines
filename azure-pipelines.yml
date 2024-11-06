@@ -16,6 +16,8 @@ variables:
   value: DiscoveryTest123
 - name: NAME_SCAN
   value: ScanTest123
+- name: PROJECT_NAME
+  value: test_BC 
 
 stages:
 - stage: CreateProject
@@ -54,3 +56,15 @@ stages:
             pip install requests
             python3 run_scan.py --apiKey $(BRIGHTSEC_API_KEY) --projectId $(PROJECT_ID) --targetUrl $(TARGET_URL) --nameScan $(NAME_SCAN)
           displayName: "Run Scan"
+- stage: RunScanEP
+  displayName: 'Run Scan for EP'
+  jobs:
+  - job: RunScriptRunScan
+    steps:
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '3.x'
+      - script: |
+          pip install requests
+          python3 run_scan.py --apiKey $(BRIGHTSEC_API_KEY) --projectId $(PROJECT_ID) --nameScan $(NAME_SCAN) --projectName $(PROJECT_NAME)
+        displayName: "Run Scan EP"
