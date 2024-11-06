@@ -66,5 +66,5 @@ stages:
           versionSpec: '3.x'
       - script: |
           pip install requests
-          python3 run_scan.py --apiKey $(BRIGHTSEC_API_KEY) --projectId $(PROJECT_ID) --nameScan $(NAME_SCAN) --projectName $(PROJECT_NAME)
+          python3 run_ep_scan.py --apiKey $(BRIGHTSEC_API_KEY) --projectId $(PROJECT_ID) --nameScan $(NAME_SCAN) --projectName $(PROJECT_NAME)
         displayName: "Run Scan EP"
