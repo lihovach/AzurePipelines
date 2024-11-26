@@ -16,14 +16,14 @@ def get_args():
 
 args = get_args()
 
-api_key = args.api_key  
+api_key = args.api_key  # API key passed as argument
 scan_name = args.scan_name  
 project_name = args.project_name  
 project_id = args.project_id 
 
 # Function to fetch entry points for a specific project
 def fetch_entry_points(project_id):
-    """Fetch entry points for a specific project from the Brightsec API."""
+    """Fetch entry points for a specific project from the BrightSec API."""
     headers = {
         "accept": "application/json",
         "Authorization": f"api-key {api_key}",
@@ -56,6 +56,13 @@ def fetch_entry_points(project_id):
             url = None
 
     logger.info(f"Fetched {len(entry_point_ids)} entry points for project {project_id}.")
+    
+    # Save entry points to a .txt file
+    with open('entrypoints.txt', 'w') as f:
+        for entry_point in entry_point_ids:
+            f.write(f"{entry_point}\n")
+    
+    logger.info(f"Entry points have been saved to 'entrypoints.txt'.")
     return entry_point_ids
 
 # Function to start a scan
@@ -103,7 +110,10 @@ def start_scan(project_id, project_name, entry_point_ids):
     except ValueError as e:
         logger.error(f"ValueError: {e}")
 
+# Fetch entry points and write to file
 entry_point_ids = fetch_entry_points(project_id)
+
+# If there are entry points, start the scan
 if entry_point_ids:
     start_scan(project_id, project_name, entry_point_ids)
 
