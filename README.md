@@ -36,6 +36,7 @@ Associates projects with specific group IDs.
 Introduces a delay to avoid API rate-limiting.
 Execution Example:
 `python create_project.py --apiKey <API_KEY> --groupIds <GROUP_IDS> --projectFile <FILE_PATH>`
+
 2. Discovery Scan Script
 File: create_discovery.py
 
@@ -44,6 +45,7 @@ Supports custom configurations for optimized crawling.
 Execution Example:
 
 `python create_discovery.py --apiKey <API_KEY> --projectId <PROJECT_ID> --targetUrl <TARGET_URL> --nameDiscovery <DISCOVERY_NAME>`
+
 3. Entry Points Fetch and Filter Script
 File: run_ep_scan.py and filter_ep_run_scan.py 
 
@@ -53,6 +55,7 @@ Handles pagination to ensure all entry points are fetched.
 Execution Example:
 
 `python run_ep_scan.py --apiKey <API_KEY> --projectId <PROJECT_ID> --filter "specific-string"`
+
 4. Scan Automation Scripts
 Files: run_scan.py and run_ep_scan_from_file.py 
 
