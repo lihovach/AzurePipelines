@@ -8,6 +8,7 @@ Scripts Overview
 2. Discovery Scan Script
 3. Entry Points Fetch and Filter Script
 4. Scan Automation Scripts
+5. Export Issues Script(High, Critical)
 - Usage Examples
 - Error Handling
 - Use Cases
@@ -64,6 +65,21 @@ Construct detailed payloads for customized scan execution.
 Execution Example (File-Based):
 
 `python run_ep_scan_from_file.py --apiKey <API_KEY> --scanName <SCAN_NAME> --projectId <PROJECT_ID> --entrypointsFile <FILE_PATH>`
+
+
+5. Export Issues Script
+File: export_issue.py
+
+This script automates the process of fetching vulnerability logs from BrightSec scans, decompressing them, filtering critical issues, and exporting the results into a CSV file for easier analysis and reporting.
+
+Key Features:
+
+- Fetches GZIP logs from the BrightSec API using a specified scan ID.
+- Decompresses the logs and filters for vulnerabilities with "High" or "Critical" severity levels.
+- Outputs the filtered vulnerabilities into a structured CSV file with fields like timestamp, severity, type, and URL.
+Execution Example:
+
+`python3 export_issue.py --api-key <API_KEY> --scan-id <SCAN_ID> --output-dir <OUTPUT_DIRECTORY>`
 ### Usage Examples
 - Create Projects from File:
 Use create_project.py to create multiple projects based on a text file.

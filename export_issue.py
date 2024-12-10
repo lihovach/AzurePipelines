@@ -1,6 +1,7 @@
 import argparse
 import gzip
 import os
+import csv
 import requests
 
 def fetch_and_save_file(api_key, scan_id, output_directory="."):
@@ -43,20 +44,41 @@ def fetch_and_save_file(api_key, scan_id, output_directory="."):
 
 def filter_vulnerabilities(file_path, output_directory):
     """
-    Read the decompressed file and filter lines containing High or Critical vulnerabilities.
+    Read the decompressed file, extract and filter lines containing High or Critical vulnerabilities,
+    and save them into a CSV file with appropriate fields.
     """
-    filtered_path = os.path.join(output_directory, "filtered_vulnerabilities.txt")
+    csv_path = os.path.join(output_directory, "filtered_vulnerabilities.csv")
     try:
         print(f"Opening decompressed file: {file_path}")
-        with open(file_path, "r") as file, open(filtered_path, "w") as output_file:
+        with open(file_path, "r") as file, open(csv_path, "w", newline='') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            # Define CSV header
+            csv_writer.writerow(["Timestamp", "Severity", "Type", "Details", "URL"])
+
             has_matches = False
             for line in file:
                 if "High" in line or "Critical" in line:
-                    output_file.write(line)
-                    has_matches = True
+                    try:
+                        # Parse the line
+                        timestamp, _, log_details = line.partition(" - WARNING - Found new ")
+                        vulnerability_type, _, rest = log_details.partition("’ (")
+                        severity, _, details_url = rest.partition(") vulnerability at: ")
+                        url, _, _ = details_url.partition(" | {}")
 
+                        # Write to CSV
+                        csv_writer.writerow([
+                            timestamp.strip(),
+                            severity.strip(),
+                            vulnerability_type.strip("‘’"),
+                            "Vulnerability found",  # Static description for now
+                            url.strip()
+                        ])
+                        has_matches = True
+                    except Exception as e:
+                        print(f"Error parsing line: {line}\n{e}")
+            
             if has_matches:
-                print(f"Filtered vulnerabilities saved to {filtered_path}")
+                print(f"Filtered vulnerabilities saved to {csv_path}")
             else:
                 print("No High or Critical vulnerabilities found.")
     except FileNotFoundError:
