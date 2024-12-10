@@ -71,3 +71,26 @@ jobs:
       - name: Run scan from file
         run: |
           python run_ep_scan_from_file.py --api_key ${{ secrets.BRIGHTSEC_API_KEY }} --scan_name "My File Scan" --project_name "My Project" --project_id ${{ secrets.PROJECT_ID }} --entrypoints_file entrypoints.txt
+
+archive_results:
+    runs-on: ubuntu-latest
+    needs: [create_project, discovery_scan, scan_entrypoints, run_ep_scan_from_file]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create archive file
+        run: |
+          mkdir -p archive
+          cp -r logs/* archive/ || echo "No logs found, skipping"
+          cp project_names.txt archive/ || echo "No project_names.txt found, skipping"
+          cp entrypoints.txt archive/ || echo "No entrypoints.txt found, skipping"
+          tar -czf pipeline_results.tar.gz -C archive .
+          echo "Archive created: pipeline_results.tar.gz"
+
+      - name: Upload archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: pipeline-results
+          path: pipeline_results.tar.gz
