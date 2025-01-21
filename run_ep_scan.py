@@ -79,7 +79,23 @@ def start_scan(project_id, project_name, entry_point_ids):
         "optimizedCrawler": True,
         "maxInteractionsChainLength": 3,
         "skipStaticParams": True,
+        "slowEpTimeout": None,
+        "extraHosts": None,
+        "fileId": None,
         "targetTimeout": 5,
+        "exclusions": {
+            "requests": [
+                {
+                    "patterns": [
+                        r"(?<excluded_file_ext>(\/\/[^?#]+\.)((?<image>jpg|jpeg|png|gif|svg|eps|webp|tif|tiff|bmp|psd|ai|raw|cr|pcx|tga|ico)|(?<video>mp4|avi|3gp|flv|h264|m4v|mkv|mov|mpg|mpeg|vob|wmv)|(?<audio>wav|mp3|ogg|wma|mid|midi|aif)|(?<document>doc|docx|odt|pdf|rtf|ods|xls|xlsx|odp|ppt|pptx)|(?<font>ttf|otf|fnt|fon))(?:$|#|\?))"
+                    ],
+                    "methods": []
+                },
+                {
+                    "patterns": ["logout|signout"]
+                }
+            ]
+        },
         "projectId": project_id,
 # Before running the script, verify if a repeater is required. 
 # If needed, include the Repeater ID in the payload configuration.

@@ -62,7 +62,7 @@ def fetch_entry_points(project_id):
 
 def filter_entry_points_with_hm(entry_points):
     """Filter entry points to include only those with 'hm' in the URL."""
-    filtered_entry_points = [ep['id'] for ep in entry_points if 'hm' in ep['url']]
+    filtered_entry_points = [ep['id'] for ep in entry_points if 'brokencrystals' in ep['url']]
     logger.info(f"Filtered to {len(filtered_entry_points)} entry points containing 'hm' in the URL.")
     return filtered_entry_points
 

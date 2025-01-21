@@ -54,17 +54,5 @@ stages:
             versionSpec: '3.x'
         - script: |
             pip install requests
-            python3 run_scan.py --apiKey $(BRIGHTSEC_API_KEY) --projectId $(PROJECT_ID) --targetUrl $(TARGET_URL) --nameScan $(NAME_SCAN)
+            python3 run_ep_scan.py --apiKey $(BRIGHTSEC_API_KEY) --scan_name $(NAME_SCAN) --project_name $(PROJECT_NAME) --project_id $(PROJECT_ID) 
           displayName: "Run Scan"
-- stage: RunScanEP
-  displayName: 'Run Scan for EP'
-  jobs:
-  - job: RunScriptRunScan
-    steps:
-      - task: UsePythonVersion@0
-        inputs:
-          versionSpec: '3.x'
-      - script: |
-          pip install requests
-          python3 run_ep_scan.py --apiKey $(BRIGHTSEC_API_KEY) --projectId $(PROJECT_ID) --nameScan $(NAME_SCAN) --projectName $(PROJECT_NAME)
-        displayName: "Run Scan EP"
