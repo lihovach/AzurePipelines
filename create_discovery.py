@@ -30,6 +30,7 @@ def run_discovery(api_key, project_id, target_url,name_discovery):
         "maxInteractionsChainLength": 3,
         "slowEpTimeout": None,
         "subdomainsCrawl": False,
+#       "authObjectId": ["7aj2039dn2bcsklla"],
 #       "repeaters": ["nqV2nLFHVY97a1RPgeMwBG"],
         "crawlerUrls": [target_url],
         "discoveryTypes": ["crawler"],
