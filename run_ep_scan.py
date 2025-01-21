@@ -81,10 +81,75 @@ def start_scan(project_id, project_name, entry_point_ids):
         "skipStaticParams": True,
         "targetTimeout": 5,
         "projectId": project_id,
+# Before running the script, verify if a repeater is required. 
+# If needed, include the Repeater ID in the payload configuration.
+#       "repeaters": ["{REPEATER_ID}"],
         "entryPointIds": entry_point_ids,
         "schedule": {"type": "future", "nextRunAt": "2024-08-24T07:00:54.830Z"},
         "module": "dast",
-        "buckets": ["api", "business_logic", "client_side", "cve", "legacy", "server_side"],
+# Provide the option to select either a bucket of tests or a specific list of individual tests to run against the target.  
+# For details about available tests and their functionalities, refer to our documentation -> https://docs.brightsec.com/docs/creating-a-modern-scan
+        "tests": [
+            "amazon_s3_takeover", 
+            "brute_force_login",
+            "xxe",
+            "cve_test",
+            "csrf",
+            #"broken_access_control", -> Needs second authentification to be configured and selected before running this test
+            "common_files",
+            "wordpress",
+            "cookie_security", 
+            "xss", 
+            "css_injection", 
+            "default_login_location", 
+            "html_injection", 
+            "retire_js", 
+            "open_cloud_storage", 
+            "proto_pollution", 
+            "secret_tokens", 
+            "stored_xss", 
+            "unvalidated_redirect", 
+            "version_control_systems", 
+            "iframe_injection",
+            "bopla", 
+            "business_constraint_bypass", 
+            "date_manipulation", 
+            "excessive_data_exposure", 
+            "id_enumeration", 
+            "insecure_output_handling", 
+            "mass_assignment", 
+            "password_reset_poisoning", 
+            "prompt_injection",
+            "jwt", 
+            "broken_saml_auth",  
+            "directory_listing", 
+            "email_injection", 
+            "file_upload", 
+            "full_path_disclosure", 
+            "graphql_introspection", 
+            "header_security", 
+            "http_method_fuzzing", 
+            "improper_asset_management", 
+            "insecure_tls_configuration", 
+            "ldapi", 
+            "lfi", 
+            "nosql", 
+            "open_database", 
+            "osi", 
+            "rfi", 
+            "sqli", 
+            "server_side_js_injection", 
+            "ssrf", 
+            "ssti", 
+            "xpathi"
+            #"lrrl" -> Lack of Resources and Rate Limiting", THIS TEST CAN BE ONLY SELECTED TO RUN SCAN SUCCESSFULLY 
+            # "This test checks for API endpoints who lack proper rate limiting and resource management.
+            #  Those endpoints might be vulnerable to reset, bruteforcing and Denial of Service attacks."
+        ],
+#       "buckets": ["api", "business_logic", "client_side", "cve", "legacy", "server_side"],
+#        Define which parts of the HTTP(S) request to test for vulnerabilities. 
+#        Only parameters of the selected parts will be added to the scan’s attack surface
+        "attackParamLocations": ["query", "fragment", "body"],
         "info": {"source": "api"}
     }
 
