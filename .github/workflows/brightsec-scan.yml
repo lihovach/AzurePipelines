@@ -16,7 +16,8 @@ jobs:
         with:
           api_token: ntl9xb3.nexa.mf903jhk1lczlt5q8gypid2m4ca02i2m
           project_id: k2x15uj1BhvPehLP9Pepjq
-          discovery_types: '["crawler"]'
+          hostname: eu.brightsec.com
+          discovery_types: crawler
           crawler_urls: https://brokencrystals.com/
 
       - name: Wait for Bright discovery
