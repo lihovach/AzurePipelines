@@ -24,7 +24,7 @@ jobs:
         uses: NeuraLegion/wait-for-discovery@v1
         with:
           api_token: 'ntl9xb3.nexa.mf903jhk1lczlt5q8gypid2m4ca02i2m'
-          discovery_id: '${{ steps.discovery.outputs.discovery_id }}'
+          discovery_id: ${{ steps.start-discovery.outputs.discovery_id }}
           project_id: 'k2x15uj1BhvPehLP9Pepjq'
           hostname: 'eu.brightsec.com'
 
