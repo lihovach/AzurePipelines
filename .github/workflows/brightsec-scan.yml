@@ -14,24 +14,26 @@ jobs:
         id: discovery
         uses: NeuraLegion/run-discovery@v1.1
         with:
-          api_token: ntl9xb3.nexa.mf903jhk1lczlt5q8gypid2m4ca02i2m
-          project_id: k2x15uj1BhvPehLP9Pepjq
-          hostname: eu.brightsec.com
-          discovery_types: crawler
-          crawler_urls: https://brokencrystals.com/
+          api_token: 'ntl9xb3.nexa.mf903jhk1lczlt5q8gypid2m4ca02i2m'
+          project_id: 'k2x15uj1BhvPehLP9Pepjq'
+          hostname: 'eu.brightsec.com'
+          discovery_types: 'crawler'  # FORCE as string
+          crawler_urls: 'https://brokencrystals.com/'  # FORCE as string
 
       - name: Wait for Bright discovery
         uses: NeuraLegion/wait-for-discovery@v1
         with:
-          api_token: ntl9xb3.nexa.mf903jhk1lczlt5q8gypid2m4ca02i2m
-          discovery_id: ${{ steps.discovery.outputs.discovery_id }}
-          project_id: k2x15uj1BhvPehLP9Pepjq
+          api_token: 'ntl9xb3.nexa.mf903jhk1lczlt5q8gypid2m4ca02i2m'
+          discovery_id: '${{ steps.discovery.outputs.discovery_id }}'
+          project_id: 'k2x15uj1BhvPehLP9Pepjq'
+          hostname: 'eu.brightsec.com'
 
       - name: Run a Bright Security Scan
         uses: NeuraLegion/run-scan@v1.2
         with:
-          api_token: ntl9xb3.nexa.mf903jhk1lczlt5q8gypid2m4ca02i2m
-          project_id: k2x15uj1BhvPehLP9Pepjq
-          discovery_types: crawler
-          crawler_urls: https://brokencrystals.com/
-          tests: '["*"]'  # This selects ALL tests
+          api_token: 'ntl9xb3.nexa.mf903jhk1lczlt5q8gypid2m4ca02i2m'
+          project_id: 'k2x15uj1BhvPehLP9Pepjq'
+          hostname: 'eu.brightsec.com'
+          discovery_types: 'crawler'
+          crawler_urls: 'https://brokencrystals.com/'
+          tests: '*'
