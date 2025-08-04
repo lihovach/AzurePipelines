@@ -21,9 +21,9 @@ jobs:
         uses: NeuraLegion/run-discovery@v1.1
         with:
           api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
-          project_id: 'k2x15uj1BhvPehLP9Pepjq'
-          hostname: 'eu.brightsec.com'
-          auth_object_id: 'x4xENVRiGZdzzX3XJQoYH9'
+          project_id: ${{ vars.PROJECT_ID }}
+          hostname: ${{ vars.HOSTNAME }}
+          auth_object_id: ${{ vars.AUTH_ID }}
           discovery_types: '[ "crawler" ]'
           crawler_urls: '[ "https://brokencrystals.com" ]'
           # restart_discovery_id: # optional
