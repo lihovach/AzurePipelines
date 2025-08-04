@@ -31,6 +31,8 @@ jobs:
           # crawl_parent_subdomains: # optional
           # concurrency: # optional
           # interactions_depth: # optional
+      - name: Get the output discovery url
+        run: echo "The discovery was started on ${{ steps.start.outputs.url }}"
       - name: Wait for Bright discovery
         id: wait_discovery
         uses: NeuraLegion/wait-for-discovery@v1
