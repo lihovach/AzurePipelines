@@ -59,10 +59,10 @@ jobs:
           connectivity: ok,unreachable
           status: new,vulnerable
     
-      - name: Use Entrypoints
-        run: |
-          echo "Project ID: ${{ steps.entrypoints.outputs.projectId }}"
-          echo "Entrypoints: ${{ steps.entrypoints.outputs.entrypoints }}"
+     # - name: Use Entrypoints
+       # run: |
+         # echo "Project ID: ${{ steps.entrypoints.outputs.projectId }}"
+         # echo "Entrypoints: ${{ steps.entrypoints.outputs.entrypoints }}"
       - name: Run a Bright Security Scan
         id: run_scan
         uses: NeuraLegion/run-scan@v1.2
