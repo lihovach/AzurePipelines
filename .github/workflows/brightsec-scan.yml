@@ -53,8 +53,11 @@ jobs:
         uses: NeuraLegion/list-entrypoints@v1.1
         with:
           api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
-          hostname: ${{ vars.HOSTNAME }}
           project_id: ${{ vars.PROJECT_ID }}
+          limit: 50
+          connectivity: ok,unreachable
+          status: new,vulnerable
+          id: entrypoints
           # limit: # optional
           # connectivity: # optional
           # status: # optional
