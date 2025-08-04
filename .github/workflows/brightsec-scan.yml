@@ -32,11 +32,13 @@ jobs:
           # concurrency: # optional
           # interactions_depth: # optional
       - name: Get the output discovery url
+        id: extract_id
         run: |
             url="${{ steps.run_discovery.outputs.url }}"
             id="${url##*/}"
             echo "Discovery ID is: $id"
             echo "discovery_id=$id" >> $GITHUB_OUTPUT
+
       - name: Wait for Bright discovery
         id: wait_discovery
         uses: NeuraLegion/wait-for-discovery@v1
