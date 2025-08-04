@@ -5,12 +5,6 @@ on:
     branches:
       - main
 
-env:
-  BRIGHTSEC_TOKEN: ${{ secrets.BRIGHTSEC_TOKEN }}
-  PROJECT_ID: ${{ secrets.PROJECT_ID }}
-  HOSTNAME: ${{ secrets.HOSTNAME }} # e.g. eu.brightsec.com
-  AUTH_ID: ${{ secrets.AUTH_ID }}
-
 jobs:
   brightsec-full-scan:
     runs-on: ubuntu-latest
@@ -23,9 +17,9 @@ jobs:
         with:
           name: GitHub discovery ${{ github.sha }}
           api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
-          project_id: ${{ env.PROJECT_ID }}
-          hostname: ${{ env.HOSTNAME }}
-          auth_object_id: ${{ env.AUTH_ID }}
+          project_id: ${{ vars.PROJECT_ID }}
+          hostname: ${{ vars.HOSTNAME }}
+          auth_object_id: ${{ vars.AUTH_ID }}
           crawler_urls: |
             [ "https://brokencrystals.com" ]
           discovery_types: |
