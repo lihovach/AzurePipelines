@@ -54,7 +54,7 @@ jobs:
         with:
           api_token: ${{ secrets.BRIGHTSEC_TOKEN  }}
           project_id: ${{ vars.PROJECT_ID }}
-          hostname: eu.brightsec.com 
+          hostname: https://eu.brightsec.com/ 
           limit: 50
           connectivity: ok,unreachable
           status: new,vulnerable
