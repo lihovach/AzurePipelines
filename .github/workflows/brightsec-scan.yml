@@ -20,10 +20,8 @@ jobs:
           project_id: ${{ vars.PROJECT_ID }}
           hostname: ${{ vars.HOSTNAME }}
           auth_object_id: ${{ vars.AUTH_ID }}
-          crawler_urls: |
-            '[ "https://brokencrystals.com" ]'
-          discovery_types: |
-            '[ "crawler" ]'
+          discovery_types: '[ "crawler" ]'
+          crawler_urls: '[ "https://brokencrystals.com" ]'
           # restart_discovery_id: # optional
           # file_id: # optional
           # repeaters: # optional
