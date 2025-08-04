@@ -11,6 +11,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Print GitHub variables
+        run: |
+            echo "PROJECT_ID=${{ vars.PROJECT_ID }}"
+            echo "HOSTNAME=${{ vars.HOSTNAME }}"
+            echo "AUTH_ID=${{ vars.AUTH_ID }}"
       - name: Run a Bright Discovery
         id: run_discovery
         uses: NeuraLegion/run-discovery@v1.1
