@@ -76,8 +76,6 @@ jobs:
             [ "crawler" ]
           crawler_urls: |
             [ "https://brokencrystals.com" ]
-          tests: | 
-            [ "client_side", "business_logic", "cve", "server_side" ]
           exclude_params: |
             [ "?<excluded_file_ext>(\/\/[^?#]+\.)((?<image>jpg|jpeg|png|gif|svg|eps|webp|tif|tiff|bmp|psd|ai|raw|cr|pcx|tga|ico)|(?<video>mp4|avi|3gp|flv|h264|m4v|mkv|mov|mpg|mpeg|vob|wmv)|(?<audio>wav|mp3|ogg|wma|mid|midi|aif)|(?<document>doc|docx|odt|pdf|rtf|ods|xls|xlsx|odp|ppt|pptx)|(?<font>ttf|otf|fnt|fon))(?:$|#|\?))", "logout|signout" ]
           # restart_scan: # optional
