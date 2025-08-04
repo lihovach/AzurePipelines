@@ -57,7 +57,6 @@ jobs:
           limit: 50
           connectivity: ok,unreachable
           status: new,vulnerable
-          id: entrypoints
           # limit: # optional
           # connectivity: # optional
           # status: # optional
