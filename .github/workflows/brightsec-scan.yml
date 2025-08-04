@@ -21,6 +21,7 @@ jobs:
         id: run_discovery
         uses: NeuraLegion/run-discovery@v1.1
         with:
+          name: GitHub discovery ${{ github.sha }}
           api_token: ${{ env.BRIGHTSEC_TOKEN }}
           project_id: ${{ env.PROJECT_ID }}
           hostname: ${{ env.HOSTNAME }}
@@ -35,7 +36,6 @@ jobs:
           # smart: # optional
           # exclude_entry_points: # optional
           # hosts_filter: # optional
-          # name: # optional
           # crawl_parent_subdomains: # optional
           # concurrency: # optional
           # interactions_depth: # optional
@@ -62,6 +62,7 @@ jobs:
         id: run_scan
         uses: NeuraLegion/run-scan@v1.2
         with:
+          name: GitHub scan ${{ github.sha }}
           api_token: ${{ env.BRIGHTSEC_TOKEN }}
           hostname: ${{ env.HOSTNAME }}
           project_id: ${{ env.PROJECT_ID }}
@@ -80,7 +81,6 @@ jobs:
           # exclude_entry_points: # optional
           # module: # optional (dast, fuzzer)
           # hosts_filter: # optional
-          # name: # optional
           # entrypoints: # optional
 
       # 5. (Optional) Stop Scan action placeholder
