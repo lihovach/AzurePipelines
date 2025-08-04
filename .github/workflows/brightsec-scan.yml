@@ -22,7 +22,7 @@ jobs:
         uses: NeuraLegion/run-discovery@v1.1
         with:
           name: GitHub discovery ${{ github.sha }}
-          api_token: ${{ env.BRIGHTSEC_TOKEN }}
+          api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
           project_id: ${{ env.PROJECT_ID }}
           hostname: ${{ env.HOSTNAME }}
           auth_object_id: ${{ env.AUTH_ID }}
@@ -43,7 +43,7 @@ jobs:
         id: wait_discovery
         uses: NeuraLegion/wait-for-discovery@v1
         with:
-          api_token: ${{ env.BRIGHTSEC_TOKEN }}
+          api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
           discovery_id: ${{ steps.run_discovery.outputs.discovery_id }}
           project_id: ${{ env.PROJECT_ID }}
           hostname: ${{ env.HOSTNAME }}
@@ -51,7 +51,7 @@ jobs:
         id: list_entrypoints
         uses: NeuraLegion/list-entrypoints@v1.1
         with:
-          api_token: ${{ env.BRIGHTSEC_TOKEN }}
+          api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
           hostname: ${{ env.HOSTNAME }}
           project_id: ${{ env.PROJECT_ID }}
           # limit: # optional
@@ -63,7 +63,7 @@ jobs:
         uses: NeuraLegion/run-scan@v1.2
         with:
           name: GitHub scan ${{ github.sha }}
-          api_token: ${{ env.BRIGHTSEC_TOKEN }}
+          api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
           hostname: ${{ env.HOSTNAME }}
           project_id: ${{ env.PROJECT_ID }}
           auth_object_id: ${{ env.AUTH_ID }}
