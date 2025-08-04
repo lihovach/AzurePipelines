@@ -63,10 +63,6 @@ jobs:
         run: |
           echo "Project ID: ${{ steps.entrypoints.outputs.projectId }}"
           echo "Entrypoints: ${{ steps.entrypoints.outputs.entrypoints }}"
-          # limit: # optional
-          # connectivity: # optional
-          # status: # optional
-          # ids_only: # optional
       - name: Run a Bright Security Scan
         id: run_scan
         uses: NeuraLegion/run-scan@v1.2
