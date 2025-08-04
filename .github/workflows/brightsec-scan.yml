@@ -9,6 +9,14 @@ jobs:
   brightsec-full-scan:
     runs-on: ubuntu-latest
     steps:
+      - name: Check if secret is available (for debugging)
+        run: |
+          if [ -z "${{ secrets.BRIGHTSEC_TOKEN }}" ]; then
+            echo "Secret is missing!"
+            exit 1
+          else
+            echo "Secret is present (value hidden for security)"
+          fi
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Run a Bright Discovery
