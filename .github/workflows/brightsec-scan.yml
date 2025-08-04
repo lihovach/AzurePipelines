@@ -31,6 +31,7 @@ jobs:
           # crawl_parent_subdomains: # optional
           # concurrency: # optional
           # interactions_depth: # optional
+          
       - name: Get the output discovery url
         id: extract_id
         run: |
@@ -48,6 +49,7 @@ jobs:
           # project_id: ${{ vars.PROJECT_ID }}
           # timeout:
           # hostname: ${{ vars.HOSTNAME }}
+  
       - name: List Project Entrypoints
         id: entrypoints
         uses: NeuraLegion/list-entrypoints@v1
@@ -63,6 +65,7 @@ jobs:
        # run: |
          # echo "Project ID: ${{ steps.entrypoints.outputs.projectId }}"
          # echo "Entrypoints: ${{ steps.entrypoints.outputs.entrypoints }}"
+         
       - name: Run a Bright Security Scan
         id: run_scan
         uses: NeuraLegion/run-scan@v1.2
@@ -79,13 +82,14 @@ jobs:
           exclude_params: |
             [ "?<excluded_file_ext>(\/\/[^?#]+\.)((?<image>jpg|jpeg|png|gif|svg|eps|webp|tif|tiff|bmp|psd|ai|raw|cr|pcx|tga|ico)|(?<video>mp4|avi|3gp|flv|h264|m4v|mkv|mov|mpg|mpeg|vob|wmv)|(?<audio>wav|mp3|ogg|wma|mid|midi|aif)|(?<document>doc|docx|odt|pdf|rtf|ods|xls|xlsx|odp|ppt|pptx)|(?<font>ttf|otf|fnt|fon))(?:$|#|\?))", "logout|signout" ]
           # restart_scan: # optional
+          # tests: |
+            # [ "sqli", "xss", "rce" ]
           # file_id: # optional
           # repeaters: # optional
           # exclude_entry_points: # optional
           # module: # optional (dast, fuzzer)
           # hosts_filter: # optional
           # entrypoints: # optional
-
-      # 5. (Optional) Stop Scan action placeholder
+          
       # - name: Stop Bright Security Scan
       #   uses: NeuraLegion/stop-scan@v1 
