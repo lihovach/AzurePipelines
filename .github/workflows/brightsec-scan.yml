@@ -36,12 +36,13 @@ jobs:
             url="${{ steps.run_discovery.outputs.url }}"
             id="${url##*/}"
             echo "Discovery ID is: $id"
+            echo "discovery_id=$id" >> $GITHUB_OUTPUT
       - name: Wait for Bright discovery
         id: wait_discovery
         uses: NeuraLegion/wait-for-discovery@v1
         with:
           api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
-          discovery_id: ${{ steps.run_discovery.outputs.url }}
+          discovery_id: ${{ steps.extract_id.outputs.discovery_id }}
           project_id: ${{ vars.PROJECT_ID }}
           timeout: 55
           hostname: ${{ vars.HOSTNAME }}
