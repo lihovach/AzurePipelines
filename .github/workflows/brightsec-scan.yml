@@ -36,8 +36,9 @@ jobs:
         uses: NeuraLegion/wait-for-discovery@v1
         with:
           api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
-          discovery_id: ${{ steps.run_discovery.outputs.discovery_id }}
+          discovery_id: ${{ steps.start.outputs.id }}
           project_id: ${{ vars.PROJECT_ID }}
+          timeout: 55
           hostname: ${{ vars.HOSTNAME }}
       - name: List Bright project entrypoints
         id: list_entrypoints
