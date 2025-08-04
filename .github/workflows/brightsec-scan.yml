@@ -32,7 +32,10 @@ jobs:
           # concurrency: # optional
           # interactions_depth: # optional
       - name: Get the output discovery url
-        run: echo "The discovery was started on ${{ steps.run_discovery.outputs.url }}
+        run: |
+            url="${{ steps.run_discovery.outputs.url }}"
+            id="${url##*/}"
+            echo "Discovery ID is: $id"
       - name: Wait for Bright discovery
         id: wait_discovery
         uses: NeuraLegion/wait-for-discovery@v1
