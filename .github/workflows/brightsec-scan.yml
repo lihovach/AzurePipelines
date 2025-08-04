@@ -52,8 +52,8 @@ jobs:
         id: entrypoints
         uses: NeuraLegion/list-entrypoints@v1
         with:
-          api_token: ${{ secrets.BRIGHT_TOKEN }}
-          project_id: ${{ secrets.PROJECT_ID }}
+          api_token: ${{ secrets.BRIGHTSEC_TOKEN  }}
+          project_id: ${{ vars.PROJECT_ID }}
           hostname: eu.brightsec.com 
           limit: 50
           connectivity: ok,unreachable
