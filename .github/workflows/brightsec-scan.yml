@@ -48,16 +48,21 @@ jobs:
           # project_id: ${{ vars.PROJECT_ID }}
           # timeout:
           # hostname: ${{ vars.HOSTNAME }}
-      - name: List Bright project entrypoints
-        id: list_entrypoints
-        uses: NeuraLegion/list-entrypoints@v1.1
+      - name: List Project Entrypoints
+        id: entrypoints
+        uses: NeuraLegion/list-entrypoints@v1
         with:
-          api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
-          hostname: ${{ vars.HOSTNAME }}
-          project_id: ${{ vars.PROJECT_ID }}
+          api_token: ${{ secrets.BRIGHT_TOKEN }}
+          project_id: ${{ secrets.PROJECT_ID }}
+          hostname: eu.brightsec.com 
           limit: 50
           connectivity: ok,unreachable
           status: new,vulnerable
+    
+      - name: Use Entrypoints
+        run: |
+          echo "Project ID: ${{ steps.entrypoints.outputs.projectId }}"
+          echo "Entrypoints: ${{ steps.entrypoints.outputs.entrypoints }}"
           # limit: # optional
           # connectivity: # optional
           # status: # optional
