@@ -15,7 +15,6 @@ jobs:
         id: run_discovery
         uses: NeuraLegion/run-discovery@v1.1
         with:
-          name: GitHub discovery ${{ github.sha }}
           api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
           project_id: 'k2x15uj1BhvPehLP9Pepjq'
           hostname: 'eu.brightsec.com'
