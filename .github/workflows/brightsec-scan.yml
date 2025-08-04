@@ -11,11 +11,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Print GitHub variables
-        run: |
-            echo "PROJECT_ID=${{ vars.PROJECT_ID }}"
-            echo "HOSTNAME=${{ vars.HOSTNAME }}"
-            echo "AUTH_ID=${{ vars.AUTH_ID }}"
       - name: Run a Bright Discovery
         id: run_discovery
         uses: NeuraLegion/run-discovery@v1.1
@@ -26,6 +21,7 @@ jobs:
           auth_object_id: ${{ vars.AUTH_ID }}
           discovery_types: '[ "crawler" ]'
           crawler_urls: '[ "https://brokencrystals.com" ]'
+          name: GitHub discovery ${{ github.sha }}
           # restart_discovery_id: # optional
           # file_id: # optional
           # repeaters: # optional
@@ -41,15 +37,15 @@ jobs:
         with:
           api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
           discovery_id: ${{ steps.run_discovery.outputs.discovery_id }}
-          project_id: ${{ env.PROJECT_ID }}
-          hostname: ${{ env.HOSTNAME }}
+          project_id: ${{ vars.PROJECT_ID }}
+          hostname: ${{ vars.HOSTNAME }}
       - name: List Bright project entrypoints
         id: list_entrypoints
         uses: NeuraLegion/list-entrypoints@v1.1
         with:
           api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
-          hostname: ${{ env.HOSTNAME }}
-          project_id: ${{ env.PROJECT_ID }}
+          hostname: ${{ vars.HOSTNAME }}
+          project_id: ${{ vars.PROJECT_ID }}
           # limit: # optional
           # connectivity: # optional
           # status: # optional
@@ -60,9 +56,9 @@ jobs:
         with:
           name: GitHub scan ${{ github.sha }}
           api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
-          hostname: ${{ env.HOSTNAME }}
-          project_id: ${{ env.PROJECT_ID }}
-          auth_object_id: ${{ env.AUTH_ID }}
+          hostname: ${{ vars.HOSTNAME }}
+          project_id: ${{ vars.PROJECT_ID }}
+          auth_object_id: ${{ vars.AUTH_ID }}
           discovery_types: |
             [ "crawler" ]
           crawler_urls: |
