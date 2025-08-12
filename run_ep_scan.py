@@ -169,7 +169,7 @@ def start_scan(project_id, project_name, entry_point_ids):
         "info": {"source": "api"}
     }
 
-    url = f"https://eu.brightsec.com/api/v1/scans"
+    url = f"https://app.brightsec.com/api/v1/scans"
     headers = {
         'accept': 'application/json',
         'Content-Type': 'application/json',
