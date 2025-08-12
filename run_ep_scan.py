@@ -30,7 +30,7 @@ def fetch_entry_points(project_id):
         "Content-Type": "application/json",
     }
 
-    base_url = f'https://eu.brightsec.com/api/v2/projects/{project_id}/entry-points'
+    base_url = f'https://app.brightsec.com/api/v2/projects/{project_id}/entry-points'
     url = f"{base_url}?limit=500"
     entry_point_ids = []
 
