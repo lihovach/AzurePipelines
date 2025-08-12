@@ -20,18 +20,6 @@ variables:
   value: test_BC 
 
 stages:
-- stage: CreateProject
-  displayName: 'Create Project'
-  jobs:
-    - job: RunScriptCreateProject
-      steps:
-        - task: UsePythonVersion@0
-          inputs:
-            versionSpec: '3.x'
-        - script: |
-            pip install requests
-            python3 create_project.py --apiKey $(BRIGHTSEC_API_KEY) --groupIds $(GROUP_IDS) --projectFile $(PROJECT_NAME_FILE)
-          displayName: "Create Project"
 - stage: CreateDiscovery
   displayName: 'Create Discovery'
   jobs:
@@ -44,6 +32,19 @@ stages:
             pip install requests
             python3 create_discovery.py --apiKey $(BRIGHTSEC_API_KEY) --projectId $(PROJECT_ID) --targetUrl $(TARGET_URL) --nameDiscovery $(NAME_DISCOVERY)
           displayName: "Create Discovery"
+# - stage: WaitForDiscovery
+#   displayName: 'Wait for Disocovery'
+#   jobs:
+#     - job: WaitForDiscovery
+#       steps:
+#         - task: UsePythonVersion@0
+#           inputs:
+#             versionSpec: '3.x'
+#         - script: |
+#             pip install requests
+#             pip install --upgrade pip
+#             python3 wait_for_dicovery.py --api_key $(BRIGHTSEC_API_KEY) --dicovery_id $(DISCOVERY_ID)
+#           displayName: "Run Scan"
 - stage: RunScan
   displayName: 'Run Scan'
   jobs:
