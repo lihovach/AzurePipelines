@@ -74,13 +74,15 @@ jobs:
           api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
           hostname: ${{ vars.HOSTNAME }}
           project_id: ${{ vars.PROJECT_ID }}
-          auth_object_id: ${{ vars.AUTH_ID }}
-          discovery_types: |
-            [ "crawler" ]
-          crawler_urls: |
-            [ "https://brokencrystals.com" ]
-          exclude_params: |
-            [ "?<excluded_file_ext>(\/\/[^?#]+\.)((?<image>jpg|jpeg|png|gif|svg|eps|webp|tif|tiff|bmp|psd|ai|raw|cr|pcx|tga|ico)|(?<video>mp4|avi|3gp|flv|h264|m4v|mkv|mov|mpg|mpeg|vob|wmv)|(?<audio>wav|mp3|ogg|wma|mid|midi|aif)|(?<document>doc|docx|odt|pdf|rtf|ods|xls|xlsx|odp|ppt|pptx)|(?<font>ttf|otf|fnt|fon))(?:$|#|\?))", "logout|signout" ]
+          entrypoints: |
+            [ 4Kzm71PH7VdmxA444dumyT, mrrLMzNhybswh7YJif9AUq, 8J5QMjWvccw1L9Xa2MCpmg]
+          # auth_object_id: ${{ vars.AUTH_ID }}
+          # discovery_types: |
+            # [ "crawler" ]
+          # crawler_urls: |
+            # [ "https://brokencrystals.com" ]
+          # exclude_params: |
+            # [ "?<excluded_file_ext>(\/\/[^?#]+\.)((?<image>jpg|jpeg|png|gif|svg|eps|webp|tif|tiff|bmp|psd|ai|raw|cr|pcx|tga|ico)|(?<video>mp4|avi|3gp|flv|h264|m4v|mkv|mov|mpg|mpeg|vob|wmv)|(?<audio>wav|mp3|ogg|wma|mid|midi|aif)|(?<document>doc|docx|odt|pdf|rtf|ods|xls|xlsx|odp|ppt|pptx)|(?<font>ttf|otf|fnt|fon))(?:$|#|\?))", "logout|signout" ]
           # restart_scan: # optional
           # tests: |
             # [ "sqli", "xss", "rce" ]
@@ -89,7 +91,7 @@ jobs:
           # exclude_entry_points: # optional
           # module: # optional (dast, fuzzer)
           # hosts_filter: # optional
-          # entrypoints: # optional
+          
           
       # - name: Stop Bright Security Scan
       #   uses: NeuraLegion/stop-scan@v1 
