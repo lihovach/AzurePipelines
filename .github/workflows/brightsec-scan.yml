@@ -76,6 +76,7 @@ jobs:
           project_id: ${{ vars.PROJECT_ID }}
           entrypoints: |
             [ 4Kzm71PH7VdmxA444dumyT, mrrLMzNhybswh7YJif9AUq, 8J5QMjWvccw1L9Xa2MCpmg]
+          module: "dast"
           # auth_object_id: ${{ vars.AUTH_ID }}
           # discovery_types: |
             # [ "crawler" ]
