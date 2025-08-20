@@ -68,7 +68,7 @@ jobs:
          
       - name: Run a Bright Security Scan
         id: run_scan
-        uses: NeuraLegion/run-scan@v1.2
+        uses: NeuraLegion/run-scan@v1.3
         with:
           name: GitHub scan ${{ github.sha }}
           api_token: ${{ secrets.BRIGHTSEC_TOKEN }}
